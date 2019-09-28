@@ -1,3 +1,4 @@
+import re
 import sys
 from mip import *
 
@@ -8,10 +9,10 @@ with open(sys.argv[1], "r") as file:
 minerios = file_content[0].split(',')[:-2]
 
 # Teor mínimo de cada tipo de minério por tonelada extraída
-teor_min = list(map(float, file_content[1].split(',')))
+teor_min = list(map(float, re.sub(r",,+", "", file_content[1]).split(',')))
 
 # Teor mínimo de cada tipo de minério por tonelada extraída
-teor_max = list(map(float, file_content[2].split(',')))
+teor_max = list(map(float, re.sub(r",,+", "", file_content[2]).split(',')))
 
 # Lista de concentração de minério por pilha
 a = [list(map(float, line.split(',')[:-2])) for line in file_content[3:]]
